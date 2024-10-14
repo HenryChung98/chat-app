@@ -1,14 +1,19 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-
-import LogoutForm from "./auth/logout/page";
-import { useUser } from "./context/UserContext";
 import { useState, useEffect } from "react";
+// to get user data
+import { useUser } from "@/app/context/UserContext";
+// components
+import LogoutForm from "./auth/logout/page";
 
 export default function Home() {
+  // to get user data
   const { user, loading } = useUser();
 
+  if (loading) {
+    return <div>loading</div>;
+  }
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <h1 className="text-2xl">Home Page</h1>
@@ -20,7 +25,7 @@ export default function Home() {
             <p> {user.id}!</p>
             <p> {user.createdAt.toString()}!</p>
             <LogoutForm />
-            {/* <Link href="/dashboard">Go to Dashboard</Link> */}
+            <Link href="/dashboard">Go to Dashboard</Link>
           </>
         ) : (
           <>

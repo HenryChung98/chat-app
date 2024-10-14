@@ -5,7 +5,6 @@ const prisma = new PrismaClient();
 
 export async function GET(req) {
   const sessionToken = req.cookies.get("session_token")?.value;
-  console.log("thisis session token" + sessionToken)
   if (!sessionToken) {
     return NextResponse.json({ errors: "Not authenticated" }, { status: 401 });
   }

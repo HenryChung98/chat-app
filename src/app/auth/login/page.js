@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 const InputField = ({ label, type, value, onChange }) => {
   return (
@@ -21,7 +21,9 @@ const InputField = ({ label, type, value, onChange }) => {
 };
 
 export default function Login() {
-  const router = useRouter();
+  const searchParams = useSearchParams();
+  // add redirect query
+  const redirectTo = searchParams.get("redirect");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,7 +45,8 @@ export default function Login() {
     const data = await res.json(); // get data from api
 
     if (res.ok) {
-      window.location.href = "/";
+      // if redirect query exists, redirect to the page
+      window.location.href = redirectTo || "/";
     } else {
       setError401(data.errors);
     }
