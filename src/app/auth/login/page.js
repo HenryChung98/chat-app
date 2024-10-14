@@ -37,12 +37,13 @@ export default function Login() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
+      credentials: "include",
     });
 
     const data = await res.json(); // get data from api
 
     if (res.ok) {
-      router.push("/");
+      window.location.href = "/";
     } else {
       setError401(data.errors);
     }

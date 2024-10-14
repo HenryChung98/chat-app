@@ -2,7 +2,9 @@
 
 [Next.js](https://nextjs.org/docs/getting-started/installation)
 
+npm install next-auth @next-auth/prisma-adapter
 
+npm install js-cookie
 
 ## Deploy on Vercel
 
